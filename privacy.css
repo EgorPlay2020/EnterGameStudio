@@ -54,7 +54,7 @@ header h1 {
     color: #fff;
 }
 
-/* Футер */
+/* Секция 3: Футер */
 .footer {
     background-color: #111;
     color: #aaa;
@@ -65,7 +65,7 @@ header h1 {
 
 .footer-content {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
     margin-bottom: 20px;
@@ -101,4 +101,11 @@ header h1 {
 
 .footer-column a:hover {
     color: #fff;
+}
+
+/* Копирайт выровненный по центру */
+.footer p {
+    text-align: center;
+    margin-top: 20px;
+    color: #aaa;
 }
