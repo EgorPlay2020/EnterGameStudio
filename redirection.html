@@ -34,15 +34,13 @@
       margin-bottom: 20px;
     }
 
-    .icon {
-      width: 100px;
-      height: 100px;
-      border-radius: 20%;
-      margin: 10px auto;
+    h1, .logo-img {
+      margin: 10px 0 20px;
     }
 
-    h1 {
-      margin: 10px 0 20px;
+    .logo-img {
+      max-width: 250px;
+      height: auto;
     }
 
     .buttons {
@@ -75,6 +73,11 @@
       margin-top: 40px;
       font-size: 14px;
       color: #ccc;
+      opacity: 0.8;
+    }
+
+    .footer strong {
+      color: #fff;
     }
 
     .error {
@@ -86,32 +89,38 @@
 </head>
 <body>
   <div class="overlay" id="gameContent">
-    <!-- тут -->
+    <!-- Контент игры будет подгружен сюда -->
   </div>
 
   <script>
     const gameId = new URLSearchParams(location.search).get('game');
-    const jsonUrl = "https://api.npoint.io/9fe82138f5704ff12a10"; 
+    const jsonUrl = "https://api.npoint.io/9fe82138f5704ff12a10";
 
     fetch(jsonUrl)
       .then(res => res.json())
       .then(data => {
+        const container = document.getElementById("gameContent");
+
         if (!data[gameId]) {
-          document.getElementById("gameContent").innerHTML = `<div class="error">Игра не найдена</div>`;
+          container.innerHTML = `<div class="error">Игра не найдена</div>`;
           return;
         }
 
         const game = data[gameId];
         document.body.style.backgroundImage = `url('${game.background}')`;
 
-        document.getElementById("gameContent").innerHTML = `
+        container.innerHTML = `
           <div class="banner"><img src="${game.banner}" alt="Баннер"></div>
-          <img class="icon" src="${game.icon}" alt="Иконка">
-          <h1>${game.title}</h1>
+          ${game.logo 
+            ? `<img class="logo-img" src="${game.logo}" alt="Логотип">` 
+            : `<h1>${game.title}</h1>`}
           <div class="buttons">
             ${game.links.map(link => `<a href="${link.url}" target="_blank">${link.label}</a>`).join('')}
           </div>
-          <div class="footer">© 2025 EnterGameStudio</div>
+          <div class="footer">
+            <strong>EnterGameStudio</strong> — все права защищены © ${new Date().getFullYear()}<br>
+            Страница игры: <code>?game=${gameId}</code>
+          </div>
         `;
       })
       .catch(err => {
