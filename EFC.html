@@ -3,23 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Название игры</title>
+  <title>ПОБЕГ ОТ ЧИКАТИЛО</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #121212;
+      background: url('https://www.dropbox.com/scl/fi/cntronhjs3n24acrd7asy/background.png?rlkey=rxmyj0ly9ugg5bs6mcw35b1x0&st=rgcnh4jc&raw=1') no-repeat center center fixed;
+      background-size: cover;
       color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 700px;
     }
 
     .banner {
       width: 100%;
-      max-width: 600px;
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 20px;
@@ -38,9 +47,10 @@
       margin: 10px auto;
     }
 
-    h1 {
-      font-size: 28px;
-      margin: 10px 0;
+    .logo {
+      max-width: 300px;
+      height: auto;
+      margin: 10px auto;
     }
 
     .buttons {
@@ -72,33 +82,35 @@
     .footer {
       margin-top: 40px;
       font-size: 14px;
-      color: #777;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
-  <!-- БАННЕР -->
-  <div class="banner">
-    <img src="https://www.dropbox.com/scl/fi/olstgt7j9j49wi6024ys0/baanner_youtube_EFC.jpg?rlkey=bee4r3zoje20caw48zxobvy6z&st=2d2qzmz6&raw=1" alt="Баннер игры">
-  </div>
+  <div class="overlay">
+    <!-- БАННЕР -->
+    <div class="banner">
+      <img src="https://www.dropbox.com/scl/fi/olstgt7j9j49wi6024ys0/baanner_youtube_EFC.jpg?rlkey=bee4r3zoje20caw48zxobvy6z&st=nv649hr0&raw=1" alt="Баннер игры">
+    </div>
 
-  <!-- ИКОНКА -->
-  <img src="https://www.dropbox.com/scl/fi/pp6ruz4t9dqahaojkqxk0/EscapeFromChikatilo_ICON.jpg?rlkey=nozqv3seg31ig5x3kv9ytem5p&st=jqtj958h&raw=1" alt="Иконка игры" class="icon">
+    <!-- ИКОНКА -->
+    <img src="https://www.dropbox.com/scl/fi/pp6ruz4t9dqahaojkqxk0/EscapeFromChikatilo_ICON.jpg?rlkey=nozqv3seg31ig5x3kv9ytem5p&st=c5zdn5f3&raw=1" alt="Иконка игры" class="icon">
 
-  <!-- НАЗВАНИЕ ИГРЫ -->
-  <h1>ПОБЕГ ОТ ЧИКАТИЛО</h1>
+    <!-- ЛОГОТИП (вместо названия) -->
+    <img src="https://www.dropbox.com/scl/fi/yalcn1ln6j7enzf8naf7m/.png?rlkey=98klzy4t4kjkd35xzs0r3secv&st=qxy0319b&raw=1" alt="Логотип игры" class="logo">
 
-  <!-- КНОПКИ СО ССЫЛКАМИ -->
-  <div class="buttons">
-    <a href="https://play.google.com/store/apps/details?id=com.EnterGameStudio.ESCAPEFROMCHIKATILO" target="_blank">Скачать на Google Play</a>
-    <a href="https://entergamestudio.itch.io/escape-from-chikatilo" target="_blank">Скачать на Itch.io</a>
-    <a href="https://www.rustore.ru/catalog/app/com.EnterGameStudio.ESCAPEFROMCHIKATILO" target="_blank">Скачать в RuStore</a>
-  </div>
+    <!-- КНОПКИ СО ССЫЛКАМИ -->
+    <div class="buttons">
+      <a href="https://play.google.com/store/apps/details?id=com.EnterGameStudio.ESCAPEFROMCHIKATILO" target="_blank">Скачать на Google Play</a>
+      <a href="https://entergamestudio.itch.io/escape-from-chikatilo" target="_blank">Скачать на Itch.io</a>
+      <a href="https://www.rustore.ru/catalog/app/com.EnterGameStudio.ESCAPEFROMCHIKATILO" target="_blank">Скачать в App Store</a>
+    </div>
 
-  <!-- ФУТЕР -->
-  <div class="footer">
-    © 2025 EnterGameStudio
+    <!-- ФУТЕР -->
+    <div class="footer">
+      © 2025 EnterGameStudio
+    </div>
   </div>
 
 </body>
