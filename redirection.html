@@ -86,12 +86,12 @@
 </head>
 <body>
   <div class="overlay" id="gameContent">
-    <!-- Контент подгрузится тут -->
+    <!-- тут -->
   </div>
 
   <script>
     const gameId = new URLSearchParams(location.search).get('game');
-    const jsonUrl = "https://api.npoint.io/9fe82138f5704ff12a10"; // замени на свою ссылку
+    const jsonUrl = "https://api.npoint.io/9fe82138f5704ff12a10"; 
 
     fetch(jsonUrl)
       .then(res => res.json())
