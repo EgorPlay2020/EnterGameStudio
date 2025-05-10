@@ -34,13 +34,15 @@
       margin-bottom: 20px;
     }
 
-    h1, .logo-img {
-      margin: 10px 0 20px;
+    .logo {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      margin: 10px auto 20px;
     }
 
-    .logo-img {
-      max-width: 250px;
-      height: auto;
+    h1 {
+      margin: 10px 0 20px;
     }
 
     .buttons {
@@ -73,11 +75,6 @@
       margin-top: 40px;
       font-size: 14px;
       color: #ccc;
-      opacity: 0.8;
-    }
-
-    .footer strong {
-      color: #fff;
     }
 
     .error {
@@ -89,7 +86,7 @@
 </head>
 <body>
   <div class="overlay" id="gameContent">
-    <!-- Контент игры будет подгружен сюда -->
+    <!-- контент игры -->
   </div>
 
   <script>
@@ -99,28 +96,21 @@
     fetch(jsonUrl)
       .then(res => res.json())
       .then(data => {
-        const container = document.getElementById("gameContent");
-
         if (!data[gameId]) {
-          container.innerHTML = `<div class="error">Игра не найдена</div>`;
+          document.getElementById("gameContent").innerHTML = `<div class="error">Игра не найдена</div>`;
           return;
         }
 
         const game = data[gameId];
         document.body.style.backgroundImage = `url('${game.background}')`;
 
-        container.innerHTML = `
+        document.getElementById("gameContent").innerHTML = `
           <div class="banner"><img src="${game.banner}" alt="Баннер"></div>
-          ${game.logo 
-            ? `<img class="logo-img" src="${game.logo}" alt="Логотип">` 
-            : `<h1>${game.title}</h1>`}
+          ${game.logo ? `<img class="logo" src="${game.logo}" alt="Логотип">` : `<h1>${game.title}</h1>`}
           <div class="buttons">
             ${game.links.map(link => `<a href="${link.url}" target="_blank">${link.label}</a>`).join('')}
           </div>
-          <div class="footer">
-            <strong>EnterGameStudio</strong> — все права защищены © ${new Date().getFullYear()}<br>
-            Страница игры: <code>?game=${gameId}</code>
-          </div>
+          <div class="footer">© 2025 EnterGameStudio</div>
         `;
       })
       .catch(err => {
