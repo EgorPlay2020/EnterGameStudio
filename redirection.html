@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Игра</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -21,7 +17,17 @@
       align-items: center;
       text-align: center;
       padding: 20px;
+      position: relative;
+      z-index: 0;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(6px);
+      z-index: -1;
     }
 
     .overlay {
@@ -30,6 +36,7 @@
       padding: 20px;
       width: 100%;
       max-width: 700px;
+      box-sizing: border-box;
     }
 
     .banner img {
@@ -39,8 +46,7 @@
     }
 
     .logo {
-      max-width: 100%;
-      max-height: 150px;
+      max-width: 300px;
       height: auto;
       margin: 10px auto 20px;
     }
@@ -61,19 +67,19 @@
     .buttons a {
       display: block;
       padding: 14px;
-      background: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.1);
       color: white;
       text-decoration: none;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
-      transition: all 0.3s ease;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
     }
 
     .buttons a:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background-color: rgba(255, 255, 255, 0.2);
       transform: scale(1.03);
-      border-color: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.4);
     }
 
     .footer {
@@ -87,11 +93,18 @@
       font-size: 20px;
       color: #ff5555;
     }
+
+    @media (max-width: 600px) {
+      .overlay {
+        padding: 16px;
+        margin: 0 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="overlay" id="gameContent">
-    <!-- контент игры -->
+    <!-- Загрузка данных -->
   </div>
 
   <script>
@@ -109,9 +122,14 @@
         const game = data[gameId];
         document.body.style.backgroundImage = `url('${game.background}')`;
 
+        const logoHTML = game.logo
+          ? `<img class="logo" src="${game.logo}" alt="Логотип">`
+          : `<h1>${game.title}</h1>`;
+
         document.getElementById("gameContent").innerHTML = `
           <div class="banner"><img src="${game.banner}" alt="Баннер"></div>
-          ${game.logo ? `<img class="logo" src="${game.logo}" alt="Логотип">` : `<h1>${game.title}</h1>`}
+          ${logoHTML}
+          ${game.logo ? `<h1>${game.title}</h1>` : ''}
           <div class="buttons">
             ${game.links.map(link => `<a href="${link.url}" target="_blank">${link.label}</a>`).join('')}
           </div>
