@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Игра</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .banner img {
+      width: 100%;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+
+    .icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 20%;
+      margin: 10px auto;
+    }
+
+    h1 {
+      margin: 10px 0 20px;
+    }
+
+    .buttons {
+      margin: 20px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .buttons a {
+      display: block;
+      padding: 14px;
+      background-color: #1f1f1f;
+      color: white;
+      text-decoration: none;
+      border: 2px solid #444;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .buttons a:hover {
+      background-color: #333;
+      transform: scale(1.03);
+      border-color: #888;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .error {
+      margin-top: 50px;
+      font-size: 20px;
+      color: #ff5555;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="gameContent">
+    <!-- Контент подгрузится тут -->
+  </div>
+
+  <script>
+    const gameId = new URLSearchParams(location.search).get('game');
+    const jsonUrl = "https://api.npoint.io/9fe82138f5704ff12a10"; // замени на свою ссылку
+
+    fetch(jsonUrl)
+      .then(res => res.json())
+      .then(data => {
+        if (!data[gameId]) {
+          document.getElementById("gameContent").innerHTML = `<div class="error">Игра не найдена</div>`;
+          return;
+        }
+
+        const game = data[gameId];
+        document.body.style.backgroundImage = `url('${game.background}')`;
+
+        document.getElementById("gameContent").innerHTML = `
+          <div class="banner"><img src="${game.banner}" alt="Баннер"></div>
+          <img class="icon" src="${game.icon}" alt="Иконка">
+          <h1>${game.title}</h1>
+          <div class="buttons">
+            ${game.links.map(link => `<a href="${link.url}" target="_blank">${link.label}</a>`).join('')}
+          </div>
+          <div class="footer">© 2025 EnterGameStudio</div>
+        `;
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("gameContent").innerHTML = `<div class="error">Ошибка загрузки данных</div>`;
+      });
+  </script>
+</body>
+</html>
