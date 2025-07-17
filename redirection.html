@@ -148,6 +148,16 @@
         `;
 
         document.title = game.title + " – EnterGameStudio";
+
+        if (game.icon) {
+          let link = document.querySelector("link[rel~='icon']");
+          if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            document.head.appendChild(link);
+          }
+          link.href = game.icon;
+        }
       })
       .catch(err => {
         console.error(err);
